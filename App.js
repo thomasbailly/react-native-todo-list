@@ -11,28 +11,26 @@ import {
 import Task from "./components/Task";
 const data = [
   {
-    id: 1,
-    thumbnail: "",
     label: "🏋 Work out 30 minutes",
-    isCompleted: false,
   },
   {
-    id: 2,
-    thumbnail: "",
     label: "🏫 Ace the react native test",
-    isCompleted: false,
   },
   {
-    id: 3,
-    thumbnail: "",
     label: " 🍸 Chill out",
-    isCompleted: false,
   },
 ];
 
 export default function App() {
   const [TASKS, setTASKS] = useState(data);
   const [newTask, setNewTask] = useState("");
+  function addTask() {
+    var donnee = TASKS;
+    donnee.push({ label: newTask });
+    setTASKS(donnee);
+    setNewTask("");
+  }
+
   return (
     <View style={styles.container} key="">
       {/* Todo today section */}
@@ -52,8 +50,8 @@ export default function App() {
       >
         <KeyboardAvoidingView style={{ flexDirection: "row" }}>
           <TextInput
-            onChangeText={(newTask) => {
-              this.setNewTask(newTask);
+            onChangeText={(text) => {
+              setNewTask(text);
             }}
             value={newTask}
             style={{
@@ -66,12 +64,14 @@ export default function App() {
           <TouchableOpacity
             style={{
               backgroundColor: "white",
-              height: 100,
-              width: 100,
+              height: 50,
+              width: 50,
               borderRadius: 20,
               justifyContent: "center",
               alignItems: "center",
+              marginLeft: 20,
             }}
+            onPress={addTask}
           >
             <Text>+</Text>
           </TouchableOpacity>
